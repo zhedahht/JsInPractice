@@ -1,4 +1,4 @@
-JsInPractice_MerryChristmas
+MerryChristmas
 ============
 
 JavaScript in Practice - Merry Christmas
