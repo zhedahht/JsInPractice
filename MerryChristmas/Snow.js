@@ -103,7 +103,7 @@ $(document).ready(function () {
         this.moveX = randomInRange(snowSettings.moveXRange);
     }
     
-        Snow.prototype.render = function(canvasContext) {
+    Snow.prototype.render = function(canvasContext) {
         canvasContext.fillStyle = "rgba(255, 255, 255, " + this.alpha + ")";
         canvasContext.beginPath();
         canvasContext.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
