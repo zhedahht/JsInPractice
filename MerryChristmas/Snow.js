@@ -33,24 +33,24 @@ function initImage(imagePath) {
 }
 
 function Range(min, max) {
-	this.min = min;
-	this.max = max;
+    this.min = min;
+    this.max = max;
 }
 
 function initSnow(width, height) {
     var radiusRange = new Range(3, 10),
-		speedYRange = new Range(1, 3),
+        speedYRange = new Range(1, 3),
         speedX = 0.05,
-		alphaRange = new Range(0.5, 1.0),
-		moveXRange = new Range(4, 18);
-		
-    var snowSettings = new SnowSettings(radiusRange, 
-								width, 
-								height, 
-								speedYRange, 
-								speedX, 
-								alphaRange, 
-								moveXRange);
+        alphaRange = new Range(0.5, 1.0),
+        moveXRange = new Range(4, 18);
+        
+    var snowSettings = new SnowSettings(radiusRange,
+                           width, 
+                           height, 
+                           speedYRange, 
+                           speedX, 
+                           alphaRange, 
+                           moveXRange);
     
     var snow = [];
     var snowNumber = 200;
@@ -75,7 +75,8 @@ ChristmasSnow.prototype.update = function() {
     }
 }
 
-function SnowSettings(radiusRange, maxX, maxY, speedYRange, speedX, alphaRange, moveXRange) {
+function SnowSettings(radiusRange, maxX, maxY, speedYRange,
+                      speedX, alphaRange, moveXRange) {
     this.radiusRange = radiusRange;
     this.maxX = maxX;
     this.maxY = maxY;
