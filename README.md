@@ -1,6 +1,6 @@
-JsInPractice
+JsInPractice_MerryChristmas
 ============
 
-JavaScript in Practice
+JavaScript in Practice - Merry Christmas
 
-Here is some sample to display cartoon snow animation. Wish you merry Christmas and happy new year.
+Here is the sample code to display cartoon snow animation. Wish you merry Christmas and happy new year.
