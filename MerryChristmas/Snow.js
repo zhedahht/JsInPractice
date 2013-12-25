@@ -3,14 +3,18 @@ $(document).ready(function () {
 });
 
 (function() {
+	// public APIs
     SnowLib = {
-        makeSnow: function (canvasId, imagePath) {
-                      var christmasSnow = new ChristmasSnow(canvasId, imagePath);
-                      var renderAndUpdateFunc = renderAndUpdate(christmasSnow)
-                      setInterval(renderAndUpdateFunc, 15);
-                  }
+        makeSnow: makeSnow
     };
-
+	
+    function makeSnow(canvasId, imagePath) {
+        var christmasSnow = new ChristmasSnow(canvasId, imagePath);
+        var renderAndUpdateFunc = renderAndUpdate(christmasSnow)
+        setInterval(renderAndUpdateFunc, 15);
+    }
+				  
+	// private functions inside the library SnowLib
     function renderAndUpdate(christmasSnow) {
         return function() {
             christmasSnow.render();
