@@ -3,7 +3,7 @@ $(document).ready(function () {
 });
 
 (function() {
-	// public APIs
+    // public APIs
     SnowLib = {
         makeSnow: makeSnow
     };
