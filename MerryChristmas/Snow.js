@@ -14,7 +14,7 @@ $(document).ready(function () {
         setInterval(renderAndUpdateFunc, 15);
     }
 				  
-	// private functions inside the library SnowLib
+    // private functions inside the library SnowLib
     function renderAndUpdate(christmasSnow) {
         return function() {
             christmasSnow.render();
