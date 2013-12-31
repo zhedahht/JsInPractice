@@ -1,8 +1,6 @@
-MerryChristmas
+Fireworks
 ============
 
-JavaScript in Practice - Merry Christmas
+JavaScript in Practice - Fireworks
 
-Here is the sample code to display cartoon snow animation, with HTML5 canvas. Wish you merry Christmas and happy new year.
-
-If you are interested in what the animation looks like, please go the link http://jsfiddle.net/zhedahht/2uD5x/1/.
+Here is the sample code to display fireworks, with HTML5 canvas. Wish happy new year.
