@@ -168,7 +168,7 @@ function Particle(pos, speed, resistance, gravity, color, size) {
         y: pos.y
     };
     var curSpeed = speed;
-    var curColor = new Color(col)
+    var curColor = color.clone();
     
     this.render = function(context) {
         context.fillStyle = color;
