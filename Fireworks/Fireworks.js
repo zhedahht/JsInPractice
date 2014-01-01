@@ -224,7 +224,7 @@ var pickColor = (function() {
     var colors = [
         new Color(0x00, 0xFF, 0xFF), // Aqua
         new Color(0x8A, 0x2B, 0xE2), // BlueViolet
-        new Color(0x7F, 0xFF, 0x00), // Chartreuse
+        new Color(0xDC, 0x14, 0x3C), // Crimson
         new Color(0xFF, 0x14, 0x93), // DeepPink
         new Color(0x22, 0x8B, 0x22), // ForestGreen
         new Color(0xAD, 0xFF, 0x2F), // GreenYello
@@ -240,7 +240,7 @@ var pickColor = (function() {
         new Color(0xFF, 0x63, 0x47), // Tomato
         new Color(0xEE, 0x82, 0xEE), // Violet
         new Color(0xF5, 0xDE, 0xB3), // Wheat
-        new Color(0xFF, 0xFF, 0x00), // Yello
+        new Color(0xFF, 0xFF, 0x00)  // Yellow
               ];
     
     return function() {
