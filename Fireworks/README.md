@@ -3,4 +3,4 @@ Fireworks
 
 JavaScript in Practice - Fireworks
 
-Here is the sample code to display fireworks, with HTML5 canvas. Wish happy new year.
+Here is the sample code to display fireworks, with HTML5 canvas. The animation is shown in http://jsfiddle.net/zhedahht/rKsyE/. Wish happy new year.
