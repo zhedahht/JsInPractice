@@ -9,7 +9,7 @@ function makeFireworkGroup(canvasId) {
     setInterval(renderAndUpdateFunc, 15);
     
     var shotFireworkGroupFunc = shotFireworkGroup(fireworkGroup)
-    setInterval(shotFireworkGroupFunc, 1000);
+    setInterval(shotFireworkGroupFunc, 1200);
 }
 
 function shotFireworkGroup(fireworkGroup) {
@@ -104,7 +104,7 @@ function Firework(pos, canvasSize) {
 }
 
 function Shot(pos, canvasSize) {
-    var numberOfParticles = 50;
+    var numberOfParticles = 300;
     var shotHeightRange = new Range(canvasSize.height * 0.55,
                                     canvasSize.height * 0.75);
     var shotHeight = randomInRange(shotHeightRange);
@@ -139,25 +139,29 @@ function Shot(pos, canvasSize) {
     function initShot(pos, canvasSize) {
         var particles = [];
         var color = pickColor();
+
+        var particlePos = {
+            x: pos.x,
+            y: pos.y - shotHeight
+        }
+
+        var resistance = 0.985;
+        var gravity = {
+            x: 0,
+            y: 0.005
+        }
+        var size = 2;
         
+        var maxSpeed = randomInRange(new Range(2.4, 3.2));
+
         for(var i = 0; i < numberOfParticles; ++i) {
-            var particlePos = {
-                x: pos.x,
-                y: pos.y - shotHeight
-            }
-            var angle = Math.PI * 2 * i / numberOfParticles;
-            var linearSpeed = 1.5;
+            var angle = randomInRange(new Range(0, Math.PI * 2));
+            var linearSpeedRange = new Range(0, maxSpeed);
+            var linearSpeed = randomInRange(linearSpeedRange);
             var speed = {
                 x: linearSpeed * Math.cos(angle),
                 y: linearSpeed * Math.sin(angle),
             }
-            
-            var resistance = 0.9995;
-            var gravity = {
-                x: 0,
-                y: 0.005
-            }
-            var size = 2;
             
             var particle = new Particle(particlePos, speed, resistance,
                                         gravity, color, size);
