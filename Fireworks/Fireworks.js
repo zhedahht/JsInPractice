@@ -122,7 +122,13 @@ function Shot(pos, canvasSize) {
         age++;
         
         particles.forEach(function(particle) {
-            particle.update();
+            var alpha = 1.0;
+            var oldness = age / life;
+            if (oldness > 0.90) {
+                alpha = 10 * (1 - oldness);
+            }
+            
+            particle.update(alpha);
         });
     }
     
@@ -171,14 +177,16 @@ function Particle(pos, speed, resistance, gravity, color, size) {
     var curColor = color.clone();
     
     this.render = function(context) {
-        context.fillStyle = color;
+        context.fillStyle = curColor;
         context.beginPath();
         context.arc(curPos.x, curPos.y, size, 0, Math.PI * 2, true);
         context.closePath();
         context.fill(); 
     }
     
-    this.update = function() {
+    this.update = function(alpha) {
+        curColor.setAlpha(alpha);
+        
         curSpeed.x = curSpeed.x * resistance + gravity.x;
         curSpeed.y = curSpeed.y * resistance + gravity.y;
         
