@@ -1,8 +1,8 @@
 $(document).ready(function () {
-    makeFireworkGroup("canvasForfireworks");
+    makeFireworkGroup("canvasForfireworks", 3);
 });
 
-function makeFireworkGroup(canvasId) {
+function makeFireworkGroup(canvasId, numberOfGroup) {
     function shotFireworkGroup(fireworkGroup) {
         var fireworks = fireworkGroup.getFireworks();
         fireworks.forEach(function(firework) {
@@ -24,15 +24,14 @@ function makeFireworkGroup(canvasId) {
         };
     }
 
-    var fireworks = new FireworkGroup(canvasId);
+    var fireworks = new FireworkGroup(canvasId, numberOfGroup);
     shotFireworkGroup(fireworks);
     
     var renderAndUpdateFunc = renderAndUpdate(fireworks)
     setInterval(renderAndUpdateFunc, 15);
 }
 
-function FireworkGroup(canvasId) {
-    var numberOfGroup = 3;
+function FireworkGroup(canvasId, numberOfGroup) {
     var fireworkGroupElement = document.getElementById(canvasId);
     var context = fireworkGroupElement.getContext("2d");
     
