@@ -94,13 +94,7 @@ function Firework(pos, canvasSize) {
     }
     
     this.update = function() {
-        // remove dead shots
-        for(var i = 0; i < shots.length; ++i) {
-            shot = shots[i];
-            if (shot.isDead()) {
-                shots.splice(i, 1);
-            }
-        }
+        removeDeadShots();
         
         shots.forEach(function(shot) {
             shot.update();
@@ -110,6 +104,15 @@ function Firework(pos, canvasSize) {
     this.shot = function() {
         var newShot = new Shot(pos, canvasSize);
         shots.push(newShot);
+    }
+    
+    function removeDeadShots() {
+        for(var i = 0; i < shots.length; ++i) {
+            shot = shots[i];
+            if (shot.isDead()) {
+                shots.splice(i, 1);
+            }
+        }
     }
 }
 
