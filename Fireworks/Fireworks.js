@@ -3,26 +3,32 @@ $(document).ready(function () {
 });
 
 function makeFireworkGroup(canvasId) {
-    var fireworkGroup = new FireworkGroup(canvasId);
+    function shotFireworkGroup(fireworkGroup) {
+        var fireworks = fireworkGroup.getFireworks();
+        fireworks.forEach(function(firework) {
+            shotFirework(firework);
+        });
+    }
     
-    var renderAndUpdateFunc = renderAndUpdate(fireworkGroup)
+    function shotFirework(firework) {
+        firework.shot();
+        
+        var wait = randomInRange(new Range(1200, 1600));
+        setTimeout(shotFirework, wait, firework);
+    }
+    
+    function renderAndUpdate(fireworks) {
+        return function() {
+            fireworks.render();
+            fireworks.update();
+        };
+    }
+
+    var fireworks = new FireworkGroup(canvasId);
+    shotFireworkGroup(fireworks);
+    
+    var renderAndUpdateFunc = renderAndUpdate(fireworks)
     setInterval(renderAndUpdateFunc, 15);
-    
-    var shotFireworkGroupFunc = shotFireworkGroup(fireworkGroup)
-    setInterval(shotFireworkGroupFunc, 1200);
-}
-
-function shotFireworkGroup(fireworkGroup) {
-    return function() {
-        fireworkGroup.shot();
-    };
-}
-
-function renderAndUpdate(fireworkGroup) {
-    return function() {
-        fireworkGroup.render();
-        fireworkGroup.update();
-    };
 }
 
 function FireworkGroup(canvasId) {
@@ -33,31 +39,35 @@ function FireworkGroup(canvasId) {
     var width = fireworkGroupElement.clientWidth;
     var height = fireworkGroupElement.clientHeight;
     
-    var fireworkGroup = initFireworkGroup(width, height);
+    var fireworks = initFireworkGroup(width, height);
+    
+    this.getFireworks = function() {
+        return fireworks;
+    }
 
     this.render = function() {
-        context.fillStyle = "#113";
+        context.fillStyle = "#010212";
         context.fillRect(0, 0, width, height)
         
-        fireworkGroup.forEach(function(firework) {
+        fireworks.forEach(function(firework) {
            firework.render(context);
         });
     }
     
     this.update = function() {
-        fireworkGroup.forEach(function(firework) {
+        fireworks.forEach(function(firework) {
            firework.update();
         });
     }
     
     this.shot = function() {
-        fireworkGroup.forEach(function(firework) {
+        fireworks.forEach(function(firework) {
            firework.shot();
         });
     }
 
     function initFireworkGroup(width, height) {
-        var fireworkGroup = [];
+        var fireworks = [];
         for(var i = 0; i < numberOfGroup; ++i) {
             var pos = {
                 x: Math.round((width / numberOfGroup) * (i + 0.5)),
@@ -68,10 +78,10 @@ function FireworkGroup(canvasId) {
                 height: height
             };
 
-            fireworkGroup[i] = new Firework(pos, canvasSize);    
+            fireworks[i] = new Firework(pos, canvasSize);    
         }
         
-        return fireworkGroup;
+        return fireworks;
     }
 }
 
@@ -84,7 +94,7 @@ function Firework(pos, canvasSize) {
     }
     
     this.update = function() {
-        // remove old shots
+        // remove dead shots
         for(var i = 0; i < shots.length; ++i) {
             shot = shots[i];
             if (shot.isDead()) {
@@ -105,7 +115,7 @@ function Firework(pos, canvasSize) {
 
 function Shot(pos, canvasSize) {
     var numberOfParticles = 300;
-    var shotHeightRange = new Range(canvasSize.height * 0.55,
+    var shotHeightRange = new Range(canvasSize.height * 0.50,
                                     canvasSize.height * 0.75);
     var shotHeight = randomInRange(shotHeightRange);
     var life = 100;
