@@ -184,9 +184,8 @@ function ParticleGroup(pos, canvasSize) {
         var oldness = age / life;
         if (oldness > 0.90) {
             alpha = 10 * (1 - oldness);
+            color.setAlpha(alpha);
         }
-        
-        color.setAlpha(alpha);
     }
 }
 
@@ -248,7 +247,7 @@ var pickColor = (function() {
     
     return function() {
         var index = Math.round(randomInRange(0, colors.length - 1));
-        return colors[index];
+        return colors[index].clone();
     }
 })();
 
@@ -260,7 +259,7 @@ function Color(red, green, blue, alpha) {
         
     this.toString = function() {
         if (a === undefined) {
-            a = 1.0;
+            return "rgb(" + r + "," + g + "," + b + ")";
         }
         
         return "rgba(" + r + "," + g + "," + b + "," + a + ")";
@@ -268,5 +267,9 @@ function Color(red, green, blue, alpha) {
     
     this.setAlpha = function(newAlpha) {
         a = newAlpha;
+    }
+    
+    this.clone = function() {
+        return new Color(r, g, b, a);
     }
 }
