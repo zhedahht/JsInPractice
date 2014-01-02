@@ -3,18 +3,18 @@ $(document).ready(function () {
 });
 
 function makeFireworkGroup(canvasId, numberOfFireworks, numberOfParticles) {
-    function shotFireworkGroup(fireworkGroup) {
+    function shootFireworkGroup(fireworkGroup) {
         var fireworks = fireworkGroup.getFireworks();
         fireworks.forEach(function(firework) {
-            shotFirework(firework);
+            shootFirework(firework);
         });
     }
     
-    function shotFirework(firework) {
-        firework.shot();
+    function shootFirework(firework) {
+        firework.shoot();
         
         var wait = randomInRange(1200, 1600);
-        setTimeout(shotFirework, wait, firework);
+        setTimeout(shootFirework, wait, firework);
     }
     
     function renderAndUpdate(fireworks) {
@@ -27,7 +27,7 @@ function makeFireworkGroup(canvasId, numberOfFireworks, numberOfParticles) {
     var fireworks = new FireworkGroup(canvasId,
                                       numberOfFireworks,
                                       numberOfParticles);
-    shotFireworkGroup(fireworks);
+    shootFireworkGroup(fireworks);
     
     var renderAndUpdateFunc = renderAndUpdate(fireworks)
     setInterval(renderAndUpdateFunc, 15);
@@ -61,9 +61,9 @@ function FireworkGroup(canvasId, numberOfFireworks, numberOfParticles) {
         });
     }
     
-    this.shot = function() {
+    this.shoot = function() {
         fireworks.forEach(function(firework) {
-           firework.shot();
+           firework.shoot();
         });
     }
 
@@ -102,7 +102,7 @@ function Firework(pos, canvasSize, numberOfParticles) {
         });
     }
     
-    this.shot = function() {
+    this.shoot = function() {
         var newShot = new ParticleGroup(pos, canvasSize, numberOfParticles);
         shots.push(newShot);
     }
