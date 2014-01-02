@@ -184,7 +184,6 @@ function Shot(pos, canvasSize) {
         var oldness = age / life;
         if (oldness > 0.90) {
             alpha = 10 * (1 - oldness);
-            console.log(alpha)
         }
         
         color.setAlpha(alpha);
