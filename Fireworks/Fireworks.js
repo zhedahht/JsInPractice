@@ -101,7 +101,7 @@ function Firework(pos, canvasSize) {
     }
     
     this.shot = function() {
-        var newShot = new Shot(pos, canvasSize);
+        var newShot = new ParticleGroup(pos, canvasSize);
         shots.push(newShot);
     }
     
@@ -115,7 +115,7 @@ function Firework(pos, canvasSize) {
     }
 }
 
-function Shot(pos, canvasSize) {
+function ParticleGroup(pos, canvasSize) {
     var numberOfParticles = 300;
     var shotHeightRange = new Range(canvasSize.height * 0.50,
                                     canvasSize.height * 0.75);
