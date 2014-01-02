@@ -13,7 +13,7 @@ function makeFireworkGroup(canvasId, numberOfFireworks) {
     function shotFirework(firework) {
         firework.shot();
         
-        var wait = randomInRange(new Range(1200, 1600));
+        var wait = randomInRange(1200, 1600);
         setTimeout(shotFirework, wait, firework);
     }
     
@@ -117,9 +117,8 @@ function Firework(pos, canvasSize) {
 
 function ParticleGroup(pos, canvasSize) {
     var numberOfParticles = 300;
-    var shotHeightRange = new Range(canvasSize.height * 0.50,
-                                    canvasSize.height * 0.75);
-    var shotHeight = randomInRange(shotHeightRange);
+    var shotHeight = randomInRange(canvasSize.height * 0.50,
+                                   canvasSize.height * 0.75);
     var life = 100;
     var age = 0;
     var particles = initShot(pos, canvasSize);
@@ -162,12 +161,11 @@ function ParticleGroup(pos, canvasSize) {
         }
         var size = 2;
         
-        var maxSpeed = randomInRange(new Range(2.4, 3.2));
+        var maxSpeed = randomInRange(2.4, 3.2);
 
         for(var i = 0; i < numberOfParticles; ++i) {
-            var angle = randomInRange(new Range(0, Math.PI * 2));
-            var linearSpeedRange = new Range(0, maxSpeed);
-            var linearSpeed = randomInRange(linearSpeedRange);
+            var angle = randomInRange(0, Math.PI * 2);
+            var linearSpeed = randomInRange(0, maxSpeed);
             var speed = {
                 x: linearSpeed * Math.cos(angle),
                 y: linearSpeed * Math.sin(angle),
@@ -221,8 +219,8 @@ function Range(min, max) {
     this.max = max;
 }
 
-function randomInRange(range) {
-    return Math.random() * (range.max - range.min) + range.min;
+function randomInRange(min, max) {
+    return Math.random() * (max - min) + min;
 }
 
 var pickColor = (function() {
@@ -249,8 +247,7 @@ var pickColor = (function() {
               ];
     
     return function() {
-        var indexRange = new Range(0, colors.length - 1);
-        var index = Math.round(randomInRange(indexRange));
+        var index = Math.round(randomInRange(0, colors.length - 1));
         return colors[index];
     }
 })();
