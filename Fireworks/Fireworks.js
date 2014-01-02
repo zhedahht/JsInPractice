@@ -123,24 +123,21 @@ function Shot(pos, canvasSize) {
     var life = 100;
     var age = 0;
     var particles = initShot(pos, canvasSize);
+    var color = pickColor();
 
     this.render = function(context) {
         particles.forEach(function(particle) {
-            particle.render(context);
+            particle.render(context, color);
         });
     }
     
     this.update = function() {
         age++;
+
+        updateColor();
         
         particles.forEach(function(particle) {
-            var alpha = 1.0;
-            var oldness = age / life;
-            if (oldness > 0.90) {
-                alpha = 10 * (1 - oldness);
-            }
-            
-            particle.update(alpha);
+            particle.update();
         });
     }
     
@@ -150,7 +147,6 @@ function Shot(pos, canvasSize) {
     
     function initShot(pos, canvasSize) {
         var particles = [];
-        var color = pickColor();
 
         var particlePos = {
             x: pos.x,
@@ -176,33 +172,41 @@ function Shot(pos, canvasSize) {
             }
             
             var particle = new Particle(particlePos, speed, resistance,
-                                        gravity, color, size);
+                                        gravity, size);
             particles.push(particle);
         }
         
         return particles;
     }
+    
+    function updateColor() {
+        var alpha = 1.0;
+        var oldness = age / life;
+        if (oldness > 0.90) {
+            alpha = 10 * (1 - oldness);
+            console.log(alpha)
+        }
+        
+        color.setAlpha(alpha);
+    }
 }
 
-function Particle(pos, speed, resistance, gravity, color, size) {
+function Particle(pos, speed, resistance, gravity, size) {
     var curPos = {
         x: pos.x,
         y: pos.y
     };
     var curSpeed = speed;
-    var curColor = color.clone();
     
-    this.render = function(context) {
-        context.fillStyle = curColor;
+    this.render = function(context, color) {
+        context.fillStyle = color;
         context.beginPath();
         context.arc(curPos.x, curPos.y, size, 0, Math.PI * 2, true);
         context.closePath();
         context.fill(); 
     }
     
-    this.update = function(alpha) {
-        curColor.setAlpha(alpha);
-        
+    this.update = function() {
         curSpeed.x = curSpeed.x * resistance + gravity.x;
         curSpeed.y = curSpeed.y * resistance + gravity.y;
         
@@ -262,10 +266,6 @@ function Color(red, green, blue, alpha) {
         }
         
         return "rgba(" + r + "," + g + "," + b + "," + a + ")";
-    }
-    
-    this.clone = function() {
-        return new Color(r, g, b, a);
     }
     
     this.setAlpha = function(newAlpha) {
