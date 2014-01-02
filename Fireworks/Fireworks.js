@@ -126,8 +126,10 @@ function ParticleGroup(pos, canvasSize) {
     var color = pickColor();
 
     this.render = function(context) {
+        var strColor = color.toString();
+        
         particles.forEach(function(particle) {
-            particle.render(context, color);
+            particle.render(context, strColor);
         });
     }
     
