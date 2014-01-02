@@ -121,7 +121,7 @@ function ParticleGroup(pos, canvasSize) {
                                    canvasSize.height * 0.75);
     var life = 100;
     var age = 0;
-    var particles = initShot(pos, canvasSize);
+    var particles = initParticles(pos, canvasSize);
     var color = pickColor();
 
     this.render = function(context) {
@@ -146,7 +146,7 @@ function ParticleGroup(pos, canvasSize) {
         return age >= life;
     }
     
-    function initShot(pos, canvasSize) {
+    function initParticles(pos, canvasSize) {
         var particles = [];
 
         var particlePos = {
