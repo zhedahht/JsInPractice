@@ -1,8 +1,8 @@
 $(document).ready(function () {
-    makeFireworkGroup("canvasForfireworks", 3);
+    makeFireworkGroup("canvasForfireworks", 3, 300);
 });
 
-function makeFireworkGroup(canvasId, numberOfFireworks) {
+function makeFireworkGroup(canvasId, numberOfFireworks, numberOfParticles) {
     function shotFireworkGroup(fireworkGroup) {
         var fireworks = fireworkGroup.getFireworks();
         fireworks.forEach(function(firework) {
@@ -24,14 +24,16 @@ function makeFireworkGroup(canvasId, numberOfFireworks) {
         };
     }
 
-    var fireworks = new FireworkGroup(canvasId, numberOfFireworks);
+    var fireworks = new FireworkGroup(canvasId,
+                                      numberOfFireworks,
+                                      numberOfParticles);
     shotFireworkGroup(fireworks);
     
     var renderAndUpdateFunc = renderAndUpdate(fireworks)
     setInterval(renderAndUpdateFunc, 15);
 }
 
-function FireworkGroup(canvasId, numberOfFireworks) {
+function FireworkGroup(canvasId, numberOfFireworks, numberOfParticles) {
     var fireworkGroupElement = document.getElementById(canvasId);
     var context = fireworkGroupElement.getContext("2d");
     
@@ -77,14 +79,14 @@ function FireworkGroup(canvasId, numberOfFireworks) {
                 height: height
             };
 
-            fireworks[i] = new Firework(pos, canvasSize);    
+            fireworks[i] = new Firework(pos, canvasSize, numberOfParticles);    
         }
         
         return fireworks;
     }
 }
 
-function Firework(pos, canvasSize) {
+function Firework(pos, canvasSize, numberOfParticles) {
     var shots = [];
     this.render = function(context) {
         shots.forEach(function(shot) {
@@ -101,7 +103,7 @@ function Firework(pos, canvasSize) {
     }
     
     this.shot = function() {
-        var newShot = new ParticleGroup(pos, canvasSize);
+        var newShot = new ParticleGroup(pos, canvasSize, numberOfParticles);
         shots.push(newShot);
     }
     
@@ -115,8 +117,7 @@ function Firework(pos, canvasSize) {
     }
 }
 
-function ParticleGroup(pos, canvasSize) {
-    var numberOfParticles = 300;
+function ParticleGroup(pos, canvasSize, numberOfParticles) {
     var shotHeight = randomInRange(canvasSize.height * 0.50,
                                    canvasSize.height * 0.75);
     var life = 100;
