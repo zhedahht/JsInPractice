@@ -214,11 +214,6 @@ function Particle(pos, speed, resistance, gravity, size) {
     }
 }
 
-function Range(min, max) {
-    this.min = min;
-    this.max = max;
-}
-
 function randomInRange(min, max) {
     return Math.random() * (max - min) + min;
 }
