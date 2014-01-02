@@ -87,38 +87,38 @@ function FireworkGroup(canvasId, numberOfFireworks, numberOfParticles) {
 }
 
 function Firework(pos, canvasSize, numberOfParticles) {
-    var shots = [];
+    var groups = [];
     this.render = function(context) {
-        shots.forEach(function(shot) {
-            shot.render(context);
+        groups.forEach(function(group) {
+            group.render(context);
         });
     }
     
     this.update = function() {
         removeDeadShots();
         
-        shots.forEach(function(shot) {
-            shot.update();
+        groups.forEach(function(group) {
+            group.update();
         });
     }
     
     this.shoot = function() {
         var newShot = new ParticleGroup(pos, canvasSize, numberOfParticles);
-        shots.push(newShot);
+        groups.push(newShot);
     }
     
     function removeDeadShots() {
-        for(var i = 0; i < shots.length; ++i) {
-            shot = shots[i];
-            if (shot.isDead()) {
-                shots.splice(i, 1);
+        for(var i = 0; i < groups.length; ++i) {
+            group = groups[i];
+            if (group.isDead()) {
+                groups.splice(i, 1);
             }
         }
     }
 }
 
 function ParticleGroup(pos, canvasSize, numberOfParticles) {
-    var shotHeight = randomInRange(canvasSize.height * 0.50,
+    var groupHeight = randomInRange(canvasSize.height * 0.50,
                                    canvasSize.height * 0.75);
     var life = 100;
     var age = 0;
@@ -152,7 +152,7 @@ function ParticleGroup(pos, canvasSize, numberOfParticles) {
 
         var particlePos = {
             x: pos.x,
-            y: pos.y - shotHeight
+            y: pos.y - groupHeight
         }
 
         var resistance = 0.985;
