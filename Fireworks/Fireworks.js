@@ -87,9 +87,9 @@ function FireworkGroup(canvasId, numberOfFireworks, numberOfParticles) {
 }
 
 function Firework(pos, canvasSize, numberOfParticles) {
-    var groups = [];
+    var paricleGroups = [];
     this.render = function(context) {
-        groups.forEach(function(group) {
+        paricleGroups.forEach(function(group) {
             group.render(context);
         });
     }
@@ -97,21 +97,21 @@ function Firework(pos, canvasSize, numberOfParticles) {
     this.update = function() {
         removeDeadShots();
         
-        groups.forEach(function(group) {
+        paricleGroups.forEach(function(group) {
             group.update();
         });
     }
     
     this.shoot = function() {
-        var newShot = new ParticleGroup(pos, canvasSize, numberOfParticles);
-        groups.push(newShot);
+        var newGroup = new ParticleGroup(pos, canvasSize, numberOfParticles);
+        paricleGroups.push(newGroup);
     }
     
     function removeDeadShots() {
-        for(var i = 0; i < groups.length; ++i) {
-            group = groups[i];
+        for(var i = 0; i < paricleGroups.length; ++i) {
+            group = paricleGroups[i];
             if (group.isDead()) {
-                groups.splice(i, 1);
+                paricleGroups.splice(i, 1);
             }
         }
     }
