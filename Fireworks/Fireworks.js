@@ -201,7 +201,6 @@ function Particle(pos, speed, resistance, gravity, size) {
         context.fillStyle = color;
         context.beginPath();
         context.arc(curPos.x, curPos.y, size, 0, Math.PI * 2, true);
-        context.closePath();
         context.fill(); 
     }
     
